@@ -60,7 +60,7 @@ class CounterHomeState extends State<CounterHome> {
           Divider(),
           urlLauncherPackageButtons(),
           Divider(),
-          sharePackageButton()
+          sharePackageButton(),
         ],
       ),
     );
