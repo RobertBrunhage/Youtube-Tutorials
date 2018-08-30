@@ -1,6 +1,8 @@
 # top_5_packages
 
-A new Flutter project.
+Top 5 packages I use for flutter.
+
+Feel free to clone and try it out to see if you like them!
 
 ## Getting Started
 
