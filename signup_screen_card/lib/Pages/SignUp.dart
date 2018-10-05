@@ -41,7 +41,7 @@ class _SignUpState extends State<SignUp> {
   Padding buildText(String text, double fontSize ThemeData theme) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Text(text, style: TextStyle(color: theme.primaryColorDark, fontSize: fontSize),),
+      child: Text(text, style: TextStyle(color: theme.primaryColorDark, fontSize: fontSize,),),
     );
   }
 
