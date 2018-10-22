@@ -1,5 +1,7 @@
 import 'package:bloc_pattern_tutorial/blocs/counter_bloc.dart';
+import 'package:bloc_pattern_tutorial/blocs/user_bloc.dart';
 import 'package:bloc_pattern_tutorial/pages/bloc_counter_page.dart';
+import 'package:bloc_pattern_tutorial/pages/bloc_user_page.dart';
 import 'package:bloc_pattern_tutorial/pages/stream_counter_page.dart';
 import 'package:bloc_pattern_tutorial/widgets/bloc_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +17,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: BlocProvider(
-        bloc: CounterBloc(),
-        child: BlocCounterPage(),
+        bloc: UserBloc(),
+        child: BlocUserPage(),
       ),
     );
   }
