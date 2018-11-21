@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "994992481986",
+    "firebase_url": "https://testing2-bf413.firebaseio.com",
+    "project_id": "testing2-bf413",
+    "storage_bucket": "testing2-bf413.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:994992481986:android:b7721e93a123d283",
+        "android_client_info": {
+          "package_name": "com.example.firebaseintegration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "994992481986-ebuuui8onn17phsjskgahcauhr2t4h9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAeDT2BLyllhIzm6lwwslsQfQwle42iSs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
