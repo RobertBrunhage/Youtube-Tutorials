@@ -10,7 +10,6 @@ class BlocCounterPage extends StatefulWidget {
 }
 
 class _BlocCounterPageState extends State<BlocCounterPage> {
-
   @override
   Widget build(BuildContext context) {
     final CounterBloc counterBloc = BlocProvider.of<CounterBloc>(context);
@@ -28,8 +27,11 @@ class _BlocCounterPageState extends State<BlocCounterPage> {
               // we update the text
               stream: counterBloc.outCounter,
               initialData: 0,
-              builder: (BuildContext context, AsyncSnapshot<int> snapshot){
-                return Text('${snapshot.data}', style: Theme.of(context).textTheme.display1,);
+              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                return Text(
+                  '${snapshot.data}',
+                  style: Theme.of(context).textTheme.display1,
+                );
               },
             )
           ],
@@ -37,7 +39,7 @@ class _BlocCounterPageState extends State<BlocCounterPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          counterBloc.incrementCounter.add(null);
+          counterBloc.increment();
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
