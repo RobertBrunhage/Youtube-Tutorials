@@ -70,6 +70,7 @@ class RepositoryServiceTodo {
     final data = await db.rawQuery('''SELECT COUNT(*) FROM ${DatabaseCreator.todoTable}''');
 
     int count = data[0].values.elementAt(0);
-    return count;
+    int idForNewItem = count++;
+    return idForNewItem;
   }
 }
