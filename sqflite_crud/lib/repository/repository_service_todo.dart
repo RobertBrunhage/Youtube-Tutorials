@@ -4,7 +4,7 @@ import 'package:sqflite_crud/repository/database_creator.dart';
 class RepositoryServiceTodo {
   static Future<List<Todo>> getAllTodos() async {
     final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
-    WHERE ${DatabaseCreator.isDeleted} == 0''';
+    WHERE ${DatabaseCreator.isDeleted} = 0''';
     final data = await db.rawQuery(sql);
     List<Todo> todos = List();
 
@@ -16,16 +16,22 @@ class RepositoryServiceTodo {
   }
 
   static Future<Todo> getTodo(int id) async {
-    final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
-    WHERE ${DatabaseCreator.id} == $id''';
-    final data = await db.rawQuery(sql);
+    //final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
+    //WHERE ${DatabaseCreator.id} = $id''';
+    //final data = await db.rawQuery(sql);
 
-    final todo = Todo.fromJson(data[0]);
+    final sql = '''SELECT * FROM ${DatabaseCreator.todoTable}
+    WHERE ${DatabaseCreator.id} = ?''';
+
+    List<dynamic> params = [id];
+    final data = await db.rawQuery(sql, params);
+
+    final todo = Todo.fromJson(data.first);
     return todo;
   }
 
   static Future<void> addTodo(Todo todo) async {
-    final sql = '''INSERT INTO ${DatabaseCreator.todoTable}
+    /*final sql = '''INSERT INTO ${DatabaseCreator.todoTable}
     (
       ${DatabaseCreator.id},
       ${DatabaseCreator.name},
@@ -38,32 +44,53 @@ class RepositoryServiceTodo {
       "${todo.name}",
       "${todo.info}",
       ${todo.isDeleted ? 1 : 0}
-    )''';
+    )''';*/
 
-    final result = await db.rawInsert(sql);
-    DatabaseCreator.databaseLog('Add todo', sql, null, result);
+    final sql = '''INSERT INTO ${DatabaseCreator.todoTable}
+    (
+      ${DatabaseCreator.id},
+      ${DatabaseCreator.name},
+      ${DatabaseCreator.info},
+      ${DatabaseCreator.isDeleted}
+    )
+    VALUES (?,?,?,?)''';
+    List<dynamic> params = [todo.id, todo.name, todo.info, todo.isDeleted ? 1 : 0];
+    final result = await db.rawInsert(sql, params);
+    DatabaseCreator.databaseLog('Add todo', sql, null, result, params);
   }
 
   static Future<void> deleteTodo(Todo todo) async {
+    /*final sql = '''UPDATE ${DatabaseCreator.todoTable}
+    SET ${DatabaseCreator.isDeleted} = 1
+    WHERE ${DatabaseCreator.id} = ${todo.id}
+    ''';*/
+
     final sql = '''UPDATE ${DatabaseCreator.todoTable}
     SET ${DatabaseCreator.isDeleted} = 1
-    WHERE ${DatabaseCreator.id} == ${todo.id}
+    WHERE ${DatabaseCreator.id} = ?
     ''';
 
-    final result = await db.rawUpdate(sql);
+    List<dynamic> params = [todo.id];
+    final result = await db.rawUpdate(sql, params);
 
-    DatabaseCreator.databaseLog('Delete todo', sql, null, result);
+    DatabaseCreator.databaseLog('Delete todo', sql, null, result, params);
   }
 
   static Future<void> updateTodo(Todo todo) async {
-    final sql = '''UPDATE ${DatabaseCreator.todoTable}
+    /*final sql = '''UPDATE ${DatabaseCreator.todoTable}
     SET ${DatabaseCreator.name} = "${todo.name}"
-    WHERE ${DatabaseCreator.id} == ${todo.id}
+    WHERE ${DatabaseCreator.id} = ${todo.id}
+    ''';*/
+
+    final sql = '''UPDATE ${DatabaseCreator.todoTable}
+    SET ${DatabaseCreator.name} = ?
+    WHERE ${DatabaseCreator.id} = ?
     ''';
 
-    final result = await db.rawUpdate(sql);
+    List<dynamic> params = [todo.name, todo.id];
+    final result = await db.rawUpdate(sql, params);
 
-    DatabaseCreator.databaseLog('Update todo', sql, null, result);
+    DatabaseCreator.databaseLog('Update todo', sql, null, result, params);
   }
 
   static Future<int> todosCount() async {
