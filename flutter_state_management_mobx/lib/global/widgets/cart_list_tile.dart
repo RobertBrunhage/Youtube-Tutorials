@@ -9,14 +9,14 @@ import 'package:state_management_example/models/product.dart';
 class CartListTile extends StatefulWidget {
   CartListTile({@required this.product, @required this.quantity});
   final Product product;
-  final double quantity;
+  final int quantity;
 
   @override
   _CartListTileState createState() => _CartListTileState();
 }
 
 class _CartListTileState extends State<CartListTile> {
-  double quantity;
+  int quantity;
   @override
   void initState() {
     quantity = widget.quantity;

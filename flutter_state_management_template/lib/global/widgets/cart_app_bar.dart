@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/app_variables.dart';
 import 'package:state_management_example/global/styles/app_colors.dart';
 import 'package:state_management_example/global/styles/app_fonts.dart';
 import 'package:state_management_example/global/widgets/cart_list_tile.dart';
 import 'package:state_management_example/models/product.dart';
 
+import '../app_variables.dart';
 import 'cart_icon_button.dart';
 
 class CartAppBar extends StatefulWidget {
@@ -20,14 +20,13 @@ class CartAppBar extends StatefulWidget {
 class _CartAppBarState extends State<CartAppBar> {
   bool showCart = false;
   AnimationController animationController;
-
   Product product = Product(
       name: 'Bluebarries',
       description: 'Delicious blueberries from the wild.',
       category: Category.Food,
       price: 55.0,
       imageURL: 'assets/pictures/Bluebarries.png');
-  double quantity = 2;
+  int quantity = 2;
 
   @override
   void initState() {
@@ -91,6 +90,7 @@ class _CartAppBarState extends State<CartAppBar> {
     double screenHeight = MediaQuery.of(context).size.height;
     double appBarHeight = 56;
     double dragStart;
+
     return GestureDetector(
       onVerticalDragStart: (d) {
         dragStart = d.globalPosition.dy;
@@ -129,7 +129,7 @@ class _CartAppBarState extends State<CartAppBar> {
                   children: <Widget>[
                     buildButton(),
                     Expanded(
-                        child: Text(widget.title,
+                        child: Text(showCart ? 'Cart' : widget.title,
                             textAlign: TextAlign.center,
                             style: AppFonts.appbarTitle())),
                     CartIconButton(
@@ -139,57 +139,58 @@ class _CartAppBarState extends State<CartAppBar> {
                 ),
               ),
             ),
-            showCart == true
-                ? Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                            child: ListView(
-                          children: <Widget>[
-                            CartListTile(
-                              product: product,
-                              quantity: quantity,
-                            ),
-                          ],
-                        )),
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                "\$${product.price * quantity}",
-                                style: AppFonts.cartValue(),
-                              ),
-                              RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                color: AppColors.appWhite,
-                                splashColor: Colors.grey,
-                                onPressed: () => checkoutOnClick(),
-                                child: Container(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.payment,
-                                        color: AppColors.appBlue2,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        'Go to checkout',
-                                        style: AppFonts.cartCheckOutBtn(),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+            if (showCart == true) ...[
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView(
+                        children: <Widget>[
+                          CartListTile(
+                            product: product,
+                            quantity: quantity,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  )
-                : const SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            "\$${product.price * quantity}",
+                            style: AppFonts.cartValue(),
+                          ),
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            color: AppColors.appWhite,
+                            splashColor: Colors.grey,
+                            onPressed: () => checkoutOnClick(),
+                            child: Container(
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.payment,
+                                    color: AppColors.appBlue2,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Go to checkout',
+                                    style: AppFonts.cartCheckOutBtn(),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),

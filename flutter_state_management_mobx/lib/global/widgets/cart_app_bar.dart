@@ -86,6 +86,7 @@ class _CartAppBarState extends State<CartAppBar> {
     double appBarHeight = 56;
     double dragStart;
     final cart = Provider.of<Cart>(context);
+
     return GestureDetector(
       onVerticalDragStart: (d) {
         dragStart = d.globalPosition.dy;
@@ -134,68 +135,81 @@ class _CartAppBarState extends State<CartAppBar> {
                 ),
               ),
             ),
-            showCart == true
-                ? Expanded(
-                    child: Column(
-                      children: <Widget>[
-                        Expanded(
-                            child: ListView(
-                                children: List.generate(
-                                    cart.uniqueProducts().length, (index) {
-                          final product = cart.uniqueProducts()[index];
+            if (showCart == true) ...[
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: ListView(
+                        children:
+                            List.generate(cart.uniqueProducts.length, (index) {
+                          final product = cart.uniqueProducts[index];
                           return Observer(
                             builder: (_) {
                               final quantity = cart.getProductQuantity(product);
-                              return quantity > 0
-                                  ? CartListTile(
-                                      product: product,
-                                      quantity:
-                                          cart.getProductQuantity(product),
-                                    )
-                                  : const SizedBox();
+                              if (quantity > 0) {
+                                return CartListTile(
+                                  product: product,
+                                  quantity: cart.getProductQuantity(product),
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
                             },
                           );
-                        }))),
-                        Padding(
-                          padding: const EdgeInsets.all(15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Observer(builder: (_) {
-                                return Text(
-                                  "\$${cart.getCartValue()}",
-                                  style: AppFonts.cartValue(),
-                                );
-                              }),
-                              RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                color: AppColors.appWhite,
-                                splashColor: Colors.grey,
-                                onPressed: () => checkoutOnClick(),
-                                child: Container(
-                                  child: Row(
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.payment,
-                                        color: AppColors.appBlue2,
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        'Go to checkout',
-                                        style: AppFonts.cartCheckOutBtn(),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                        }),
+                      ),
                     ),
-                  )
-                : const SizedBox(),
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Observer(builder: (_) {
+                            return Row(
+                              children: <Widget>[
+                                Text(
+                                  "\$${cart.cartValue}",
+                                  style: AppFonts.cartValue(),
+                                ),
+                                if (cart.freight != 0) ...[
+                                  Text(
+                                    " + \$${cart.freight}",
+                                    style: AppFonts.cartValue(),
+                                  ),
+                                ],
+                              ],
+                            );
+                          }),
+                          RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            color: AppColors.appWhite,
+                            splashColor: Colors.grey,
+                            onPressed: () => checkoutOnClick(),
+                            child: Container(
+                              child: Row(
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.payment,
+                                    color: AppColors.appBlue2,
+                                  ),
+                                  SizedBox(width: 5),
+                                  Text(
+                                    'Go to checkout',
+                                    style: AppFonts.cartCheckOutBtn(),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ],
         ),
       ),

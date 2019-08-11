@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:state_management_example/global/app_variables.dart';
 
 class Product {
-  Product(
+  const Product(
       {@required this.name,
       @required this.description,
       @required this.category,
@@ -13,4 +13,10 @@ class Product {
   final Category category;
   final double price;
   final String imageURL;
+
+  @override
+  bool operator ==(dynamic o) => o is Product && o.name == name;
+
+  @override
+  int get hashCode => name.hashCode;
 }

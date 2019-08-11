@@ -6,48 +6,51 @@ part 'cart.g.dart';
 class Cart = _Cart with _$Cart;
 
 abstract class _Cart with Store {
+  _Cart() {
+    addFreigthReaction =
+        reaction((_) => cartContent.length, (int cartItemCount) {
+      if (cartItemCount >= 10 && freight == 0) {
+        freight = 20;
+      } else if (cartItemCount < 10 && freight != 0) {
+        freight = 0;
+      }
+    });
+    /*
+    autorun((_) {
+      React to all observables and do something.
+    });
+
+    when((_) => cartContent.length == 10, () {
+      React to cartContent and do something once.
+    });
+    */
+  }
+
+  Function addFreigthReaction;
+
   @observable
   ObservableList<Product> cartContent = ObservableList<Product>();
 
+  @observable
+  double freight = 0;
+
   @computed
-  double getProductQuantity(Product product) => ObservableList.of(cartContent
-          .where((productInCart) => productInCart.name == product.name))
-      .length
-      .toDouble();
+  int getProductQuantity(Product product) =>
+      ObservableList.of(cartContent.where((p) => p == product)).length;
 
   @computed
   double getProductValue(Product product) {
-    final productList = ObservableList.of(cartContent
-        .where((productInCart) => productInCart.name == product.name));
-    double value = 0;
-    for (var product in productList) {
-      value += product.price;
-    }
-    return value;
+    return ObservableList.of(cartContent.where((p) => p == product))
+        .fold<double>(0, (totalValue, product) => totalValue + product.price);
   }
 
   @computed
-  double getCartValue() {
-    final productList = ObservableList.of(cartContent);
-    double value = 0;
-    for (var product in productList) {
-      value += product.price;
-    }
-    return value;
-  }
+  double get cartValue => ObservableList.of(cartContent)
+      .fold<double>(0, (totalValue, product) => totalValue + product.price);
 
   @computed
-  List<Product> uniqueProducts() {
-    final unique = List<String>();
-    return ObservableList.of(cartContent).where((product) {
-      if (!unique.contains(product.name)) {
-        unique.add(product.name);
-        return true;
-      } else {
-        return false;
-      }
-    }).toList();
-  }
+  List<Product> get uniqueProducts =>
+      ObservableList.of(cartContent).toSet().toList();
 
   @action
   void addToCart(Product product) {
@@ -60,26 +63,32 @@ abstract class _Cart with Store {
   }
 
   @action
-  void removeAllFromCart(Product removeProduct) {
-    cartContent.removeWhere((product) => removeProduct.name == product.name);
+  void removeAllFromCart(Product product) {
+    cartContent.removeWhere((p) => product == p);
   }
 
   @action
-  void changeQuantity(Product removeProduct, double quantity) {
-    double differens = quantity - getProductQuantity(removeProduct);
-    while (differens != 0) {
-      if (differens > 0) {
-        addToCart(removeProduct);
-        differens--;
-      } else if (differens < 0) {
-        removeOneCart(removeProduct);
-        differens++;
+  void changeQuantity(Product product, int quantity) {
+    int difference = quantity - getProductQuantity(product);
+    while (difference != 0) {
+      if (difference > 0) {
+        addToCart(product);
+        difference--;
+      } else if (difference < 0) {
+        removeOneCart(product);
+        difference++;
       }
     }
   }
 
   @action
   void emptyCart() {
-    cartContent = ObservableList<Product>();
+    cartContent.clear();
+  }
+
+  @override
+  void dispose() {
+    addFreigthReaction();
+    super.dispose();
   }
 }

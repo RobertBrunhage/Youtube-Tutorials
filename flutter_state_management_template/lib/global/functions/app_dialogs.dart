@@ -5,7 +5,7 @@ import 'package:state_management_example/global/styles/app_fonts.dart';
 class AppDialog {
   static String addOnClick({TextEditingController textEditingController}) {
     print('Add quantity here!');
-    double currentValue = double.parse(textEditingController.text);
+    int currentValue = int.parse(textEditingController.text);
     if (currentValue < 999) {
       currentValue++;
     }
@@ -14,7 +14,7 @@ class AppDialog {
 
   static String subtrackOnClick({TextEditingController textEditingController}) {
     print('Subtract quantity here!');
-    double currentValue = double.parse(textEditingController.text);
+    int currentValue = int.parse(textEditingController.text);
     if (currentValue > 0) {
       currentValue--;
     }
@@ -26,23 +26,23 @@ class AppDialog {
     return quantity;
   }
 
-  static void cancelOnClick({BuildContext context}) {
+  static void cancelOnClick({BuildContext context, int quantity}) {
     print('Cancel change here!');
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(quantity);
   }
 
-  static void confirmOnClick({BuildContext context}) {
+  static void confirmOnClick({BuildContext context, int newQuantity}) {
     print('Confirm quantity here!');
-    Navigator.of(context).pop();
+    Navigator.of(context).pop(newQuantity);
   }
 
-  static Future<double> quantityDialog(
+  static Future<int> quantityDialog(
       {@required BuildContext context,
       @required String title,
-      @required double quantity}) async {
+      @required int quantity}) async {
     TextEditingController textEditingController = TextEditingController();
     textEditingController.text = quantity.toString();
-    final newQuantity = await showDialog<double>(
+    final newQuantity = await showDialog<int>(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
@@ -116,8 +116,8 @@ class AppDialog {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     FlatButton(
-                      onPressed: () =>
-                          AppDialog.cancelOnClick(context: context),
+                      onPressed: () => AppDialog.cancelOnClick(
+                          context: context, quantity: quantity),
                       child: Text('Cancel'),
                     ),
                     RaisedButton(
@@ -125,8 +125,9 @@ class AppDialog {
                           borderRadius: BorderRadius.circular(15)),
                       color: AppColors.appBlue1,
                       splashColor: Colors.grey,
-                      onPressed: () =>
-                          AppDialog.confirmOnClick(context: context),
+                      onPressed: () => AppDialog.confirmOnClick(
+                          context: context,
+                          newQuantity: int.parse(textEditingController.text)),
                       child: Container(
                           child: Text(
                         'Confirm',

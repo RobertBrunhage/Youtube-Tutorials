@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<Cart>(
       builder: (_) => Cart(),
+      dispose: (_, cart) => cart.dispose(),
       child: MaterialApp(
         home: Home(),
       ),
