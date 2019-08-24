@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:state_management_example/mobx/cart.dart';
+import 'package:state_management_example/cart/cart.dart';
+import 'package:state_management_example/shared/styles/app_colors.dart';
+import 'package:state_management_example/shared/styles/app_fonts.dart';
 
 class CartIconButton extends StatelessWidget {
   const CartIconButton({

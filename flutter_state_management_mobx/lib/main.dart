@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'mobx/cart.dart';
+import 'package:state_management_example/cart/cart.dart';
+
 import 'pages/home/home.dart';
 import 'package:provider/provider.dart';
-
-final cart = Cart();
 
 void main() => runApp(MyApp());
 

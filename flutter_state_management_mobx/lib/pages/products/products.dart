@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/app_variables.dart';
-import 'package:state_management_example/global/widgets/cart_app_bar.dart';
-import 'package:state_management_example/models/product.dart';
-import 'package:state_management_example/models/product_range.dart';
 import 'package:state_management_example/pages/products/widgets.dart/product_card.dart';
+import 'package:state_management_example/shared/models/product.dart';
+import 'package:state_management_example/shared/models/product_range.dart';
+import 'package:state_management_example/shared/styles/app_colors.dart';
+import 'package:state_management_example/shared/utils/app_variables.dart';
+import 'package:state_management_example/shared/widgets/cart_app_bar.dart';
 
 class ProductPage extends StatefulWidget {
   ProductPage({this.category});
@@ -27,12 +27,7 @@ class _ProductPageState extends State<ProductPage> {
         category: Category.Games,
         price: 70.0,
         imageURL: 'assets/pictures/Mario.jpg'),
-    Product(
-        name: 'Dart',
-        description: 'Simple dart game.',
-        category: Category.Games,
-        price: 20.0,
-        imageURL: 'assets/pictures/Dart.jpg'),
+    Product(name: 'Dart', description: 'Simple dart game.', category: Category.Games, price: 20.0, imageURL: 'assets/pictures/Dart.jpg'),
     Product(
         name: 'Watermelon',
         description: 'Water and suger in a red solid form.',

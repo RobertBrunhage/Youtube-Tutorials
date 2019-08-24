@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:state_management_example/global/functions/app_dialogs.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/mobx/cart.dart';
-import 'package:state_management_example/models/product.dart';
+import 'package:state_management_example/cart/cart.dart';
+import 'package:state_management_example/shared/models/product.dart';
+import 'package:state_management_example/shared/styles/app_colors.dart';
+import 'package:state_management_example/shared/styles/app_fonts.dart';
+import 'package:state_management_example/shared/utils/app_dialogs.dart';
 
 class CartListTile extends StatefulWidget {
   CartListTile({@required this.product, @required this.quantity});
@@ -25,8 +25,7 @@ class _CartListTileState extends State<CartListTile> {
 
   Future<void> tileOnClick() async {
     final cart = Provider.of<Cart>(context);
-    quantity = await AppDialog.quantityDialog(
-        context: context, title: 'Quantity', quantity: widget.quantity);
+    quantity = await AppDialog.quantityDialog(context: context, title: 'Quantity', quantity: widget.quantity);
     cart.changeQuantity(widget.product, quantity);
   }
 

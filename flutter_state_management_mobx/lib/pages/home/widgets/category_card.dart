@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/global/app_variables.dart';
 import 'package:state_management_example/pages/products/products.dart';
+import 'package:state_management_example/shared/styles/app_colors.dart';
+import 'package:state_management_example/shared/styles/app_fonts.dart';
+import 'package:state_management_example/shared/utils/app_variables.dart';
 
 class CategoryCard extends StatelessWidget {
-  CategoryCard(
-      {this.title, this.text, this.color, this.iconData, this.category});
+  CategoryCard({this.title, this.text, this.color, this.iconData, this.category});
 
   final String title;
   final String text;
@@ -15,8 +14,7 @@ class CategoryCard extends StatelessWidget {
   final Category category;
 
   void navigateToProducts({BuildContext context, Category category}) {
-    Navigator.of(context).push<ProductPage>(MaterialPageRoute(
-        builder: (BuildContext context) => ProductPage(category: category)));
+    Navigator.of(context).push<ProductPage>(MaterialPageRoute(builder: (BuildContext context) => ProductPage(category: category)));
   }
 
   @override
@@ -53,19 +51,16 @@ class CategoryCard extends StatelessWidget {
                     child: Container(
                       width: 165,
                       child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                         color: color,
-                        onPressed: () => navigateToProducts(
-                            context: context, category: category),
+                        onPressed: () => navigateToProducts(context: context, category: category),
                         child: Row(
                           children: <Widget>[
                             Icon(
                               Icons.apps,
                               color: AppColors.appWhite,
                             ),
-                            Text('Browse $title',
-                                style: AppFonts.categoryCardBtn()),
+                            Text('Browse $title', style: AppFonts.categoryCardBtn()),
                           ],
                         ),
                       ),

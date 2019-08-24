@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/mobx/cart.dart';
-import 'package:state_management_example/models/product.dart';
+import 'package:state_management_example/cart/cart.dart';
+import 'package:state_management_example/shared/models/product.dart';
+import 'package:state_management_example/shared/styles/app_colors.dart';
+import 'package:state_management_example/shared/styles/app_fonts.dart';
 
 class ProductCard extends StatelessWidget {
   ProductCard({@required this.product});
@@ -50,8 +50,7 @@ class ProductCard extends StatelessWidget {
                   SizedBox(height: 5),
                   Container(
                     width: double.infinity,
-                    child: Text(product.description,
-                        style: AppFonts.productCardTDescription()),
+                    child: Text(product.description, style: AppFonts.productCardTDescription()),
                   ),
                 ],
               ),
@@ -64,17 +63,14 @@ class ProductCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text('\$' + product.price.toString(),
-                      style: AppFonts.productCardPrice()),
+                  Text('\$' + product.price.toString(), style: AppFonts.productCardPrice()),
                   RaisedButton(
                     onPressed: () => addToCartOnClick(context),
                     color: AppColors.appBlue1,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.add_shopping_cart,
-                            color: AppColors.appWhite),
+                        Icon(Icons.add_shopping_cart, color: AppColors.appWhite),
                         Text('Add to cart', style: AppFonts.productCardBtn())
                       ],
                     ),
