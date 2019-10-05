@@ -53,7 +53,7 @@ abstract class _Cart with Store {
   }
 
   @action
-  void removeOneCart(Product product) {
+  void removeProduct(Product product) {
     cartContent.remove(product);
   }
 
@@ -70,7 +70,7 @@ abstract class _Cart with Store {
         addToCart(product);
         difference--;
       } else if (difference < 0) {
-        removeOneCart(product);
+        removeProduct(product);
         difference++;
       }
     }

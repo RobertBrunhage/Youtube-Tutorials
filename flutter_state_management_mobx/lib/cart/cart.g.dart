@@ -68,10 +68,10 @@ mixin _$Cart on _Cart, Store {
   }
 
   @override
-  void removeOneCart(Product product) {
+  void removeProduct(Product product) {
     final _$actionInfo = _$_CartActionController.startAction();
     try {
-      return super.removeOneCart(product);
+      return super.removeProduct(product);
     } finally {
       _$_CartActionController.endAction(_$actionInfo);
     }

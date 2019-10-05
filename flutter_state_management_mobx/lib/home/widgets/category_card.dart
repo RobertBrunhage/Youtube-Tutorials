@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/pages/products/products.dart';
+import 'package:state_management_example/products/products.dart';
 import 'package:state_management_example/shared/styles/app_colors.dart';
 import 'package:state_management_example/shared/styles/app_fonts.dart';
 import 'package:state_management_example/shared/utils/app_variables.dart';
