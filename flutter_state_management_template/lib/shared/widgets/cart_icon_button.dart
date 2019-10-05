@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
+
+import '../styles/app_colors.dart';
+import '../styles/app_fonts.dart';
 
 class CartIconButton extends StatelessWidget {
   const CartIconButton({

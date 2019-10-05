@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
+
+import '../styles/app_colors.dart';
+import '../styles/app_fonts.dart';
 
 class AppDialog {
   static String addOnClick({TextEditingController textEditingController}) {
@@ -36,10 +37,7 @@ class AppDialog {
     Navigator.of(context).pop(newQuantity);
   }
 
-  static Future<int> quantityDialog(
-      {@required BuildContext context,
-      @required String title,
-      @required int quantity}) async {
+  static Future<int> quantityDialog({@required BuildContext context, @required String title, @required int quantity}) async {
     TextEditingController textEditingController = TextEditingController();
     textEditingController.text = quantity.toString();
     final newQuantity = await showDialog<int>(
@@ -72,16 +70,13 @@ class AppDialog {
                       child: IconButton(
                         color: AppColors.appWhite,
                         icon: Icon(Icons.exposure_neg_1),
-                        onPressed: () => textEditingController.text =
-                            AppDialog.subtrackOnClick(
-                                textEditingController: textEditingController),
+                        onPressed: () =>
+                            textEditingController.text = AppDialog.subtrackOnClick(textEditingController: textEditingController),
                       ),
                     ),
                     Container(
                       width: 100,
-                      decoration: BoxDecoration(
-                          color: AppColors.appGray2,
-                          borderRadius: BorderRadius.circular(15)),
+                      decoration: BoxDecoration(color: AppColors.appGray2, borderRadius: BorderRadius.circular(15)),
                       child: TextField(
                         decoration: InputDecoration(
                           border: InputBorder.none,
@@ -91,9 +86,7 @@ class AppDialog {
                         controller: textEditingController,
                         keyboardType: TextInputType.number,
                         maxLength: 3,
-                        onChanged: (onChangeQuantity) =>
-                            textEditingController.text =
-                                onTextFieldChange(quantity: onChangeQuantity),
+                        onChanged: (onChangeQuantity) => textEditingController.text = onTextFieldChange(quantity: onChangeQuantity),
                       ),
                     ),
                     Container(
@@ -104,9 +97,7 @@ class AppDialog {
                       child: IconButton(
                         color: AppColors.appWhite,
                         icon: Icon(Icons.exposure_plus_1),
-                        onPressed: () => textEditingController.text =
-                            AppDialog.addOnClick(
-                                textEditingController: textEditingController),
+                        onPressed: () => textEditingController.text = AppDialog.addOnClick(textEditingController: textEditingController),
                       ),
                     ),
                   ],
@@ -116,18 +107,14 @@ class AppDialog {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     FlatButton(
-                      onPressed: () => AppDialog.cancelOnClick(
-                          context: context, quantity: quantity),
+                      onPressed: () => AppDialog.cancelOnClick(context: context, quantity: quantity),
                       child: Text('Cancel'),
                     ),
                     RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                       color: AppColors.appBlue1,
                       splashColor: Colors.grey,
-                      onPressed: () => AppDialog.confirmOnClick(
-                          context: context,
-                          newQuantity: int.parse(textEditingController.text)),
+                      onPressed: () => AppDialog.confirmOnClick(context: context, newQuantity: int.parse(textEditingController.text)),
                       child: Container(
                           child: Text(
                         'Confirm',

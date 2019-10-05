@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/global/widgets/cart_list_tile.dart';
-import 'package:state_management_example/models/product.dart';
+import 'package:state_management_example/shared/models/product.dart';
+import 'package:state_management_example/shared/utils/app_variables.dart';
 
-import '../app_variables.dart';
+import '../styles/app_colors.dart';
+import '../styles/app_fonts.dart';
 import 'cart_icon_button.dart';
+import 'cart_list_tile.dart';
 
 class CartAppBar extends StatefulWidget {
   CartAppBar({@required this.inHomePage, @required this.title});
@@ -69,16 +69,14 @@ class _CartAppBarState extends State<CartAppBar> {
       return AnimatedCrossFade(
         firstChild: deleteBtn,
         secondChild: const SizedBox(width: 48),
-        crossFadeState:
-            showCart ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        crossFadeState: showCart ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         duration: const Duration(milliseconds: 250),
       );
     } else {
       return AnimatedCrossFade(
         firstChild: deleteBtn,
         secondChild: homeBtn,
-        crossFadeState:
-            showCart ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+        crossFadeState: showCart ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         duration: const Duration(milliseconds: 250),
       );
     }
@@ -110,13 +108,9 @@ class _CartAppBarState extends State<CartAppBar> {
         duration: const Duration(milliseconds: 250),
         curve: Curves.easeOut,
         height: showCart == true ? screenHeight * 0.85 : 56 + statusbar,
-        decoration: BoxDecoration(color: AppColors.appBlue1, boxShadow: [
-          BoxShadow(
-              color: AppColors.appBlack,
-              blurRadius: 10,
-              spreadRadius: 10,
-              offset: Offset(0, -10))
-        ]),
+        decoration: BoxDecoration(
+            color: AppColors.appBlue1,
+            boxShadow: [BoxShadow(color: AppColors.appBlack, blurRadius: 10, spreadRadius: 10, offset: Offset(0, -10))]),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -128,10 +122,7 @@ class _CartAppBarState extends State<CartAppBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     buildButton(),
-                    Expanded(
-                        child: Text(showCart ? 'Cart' : widget.title,
-                            textAlign: TextAlign.center,
-                            style: AppFonts.appbarTitle())),
+                    Expanded(child: Text(showCart ? 'Cart' : widget.title, textAlign: TextAlign.center, style: AppFonts.appbarTitle())),
                     CartIconButton(
                       cartOnClick: cartOnClick,
                     ),
@@ -139,7 +130,7 @@ class _CartAppBarState extends State<CartAppBar> {
                 ),
               ),
             ),
-            if (showCart == true) ...[
+            if (showCart == true)
               Expanded(
                 child: Column(
                   children: <Widget>[
@@ -163,8 +154,7 @@ class _CartAppBarState extends State<CartAppBar> {
                             style: AppFonts.cartValue(),
                           ),
                           RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                             color: AppColors.appWhite,
                             splashColor: Colors.grey,
                             onPressed: () => checkoutOnClick(),
@@ -190,7 +180,6 @@ class _CartAppBarState extends State<CartAppBar> {
                   ],
                 ),
               ),
-            ],
           ],
         ),
       ),

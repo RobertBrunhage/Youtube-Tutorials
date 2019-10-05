@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/functions/app_dialogs.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/models/product.dart';
+import 'package:state_management_example/shared/models/product.dart';
+import 'package:state_management_example/shared/utils/app_dialogs.dart';
+
+import '../styles/app_colors.dart';
+import '../styles/app_fonts.dart';
 
 class CartListTile extends StatefulWidget {
   CartListTile({@required this.product, @required this.quantity});

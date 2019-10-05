@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/app_variables.dart';
-import 'package:state_management_example/global/widgets/cart_app_bar.dart';
-import 'package:state_management_example/pages/home/widgets/category_card.dart';
+import 'package:state_management_example/home/widgets/category_card.dart';
+import 'package:state_management_example/shared/utils/app_variables.dart';
+
+import '../shared/styles/app_colors.dart';
+import '../shared/widgets/cart_app_bar.dart';
 
 class Home extends StatefulWidget {
   @override

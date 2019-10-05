@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:state_management_example/global/styles/app_colors.dart';
-import 'package:state_management_example/global/styles/app_fonts.dart';
-import 'package:state_management_example/global/app_variables.dart';
-import 'package:state_management_example/pages/products/products.dart';
+import 'package:state_management_example/products/products.dart';
+import 'package:state_management_example/shared/utils/app_variables.dart';
+
+import '../../shared/styles/app_colors.dart';
+import '../../shared/styles/app_fonts.dart';
 
 class CategoryCard extends StatelessWidget {
   CategoryCard(
