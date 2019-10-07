@@ -11,74 +11,76 @@ class ProductCard extends StatelessWidget {
   final Product product;
 
   void addToCartOnClick(BuildContext context) {
-    final cart = Provider.of<Cart>(context);
+    final cart = Provider.of<Cart>(context, listen: false);
     cart.addToCart(product);
   }
 
   @override
   Widget build(BuildContext context) {
     return Card(
-        elevation: 5,
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 132,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    fit: BoxFit.fitWidth,
-                    image: AssetImage(product.imageURL),
-                  ),
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(3),
-                    topLeft: Radius.circular(3),
-                  )),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    width: double.infinity,
-                    child: Text(
-                      product.name,
-                      style: AppFonts.productCardTitle(),
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    width: double.infinity,
-                    child: Text(product.description, style: AppFonts.productCardTDescription()),
-                  ),
-                ],
+      elevation: 5,
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 132,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                fit: BoxFit.fitWidth,
+                image: AssetImage(product.imageURL),
+              ),
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(3),
+                topLeft: Radius.circular(3),
               ),
             ),
-            Expanded(
-              child: SizedBox(),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 5, 8, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  width: double.infinity,
+                  child: Text(
+                    product.name,
+                    style: AppFonts.productCardTitle(),
+                    textAlign: TextAlign.start,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  width: double.infinity,
+                  child: Text(product.description, style: AppFonts.productCardTDescription()),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text('\$' + product.price.toString(), style: AppFonts.productCardPrice()),
-                  RaisedButton(
-                    onPressed: () => addToCartOnClick(context),
-                    color: AppColors.appBlue1,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(Icons.add_shopping_cart, color: AppColors.appWhite),
-                        Text('Add to cart', style: AppFonts.productCardBtn())
-                      ],
-                    ),
-                  )
-                ],
-              ),
+          ),
+          Expanded(
+            child: SizedBox(),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('\$' + product.price.toString(), style: AppFonts.productCardPrice()),
+                RaisedButton(
+                  onPressed: () => addToCartOnClick(context),
+                  color: AppColors.appBlue1,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.add_shopping_cart, color: AppColors.appWhite),
+                      Text('Add to cart', style: AppFonts.productCardBtn())
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

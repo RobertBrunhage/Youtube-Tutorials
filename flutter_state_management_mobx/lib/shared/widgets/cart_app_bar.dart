@@ -21,40 +21,35 @@ class CartAppBar extends StatefulWidget {
 class _CartAppBarState extends State<CartAppBar> {
   bool showCart = false;
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  void cartOnClick() {
+  void _cartOnClick() {
     setState(() {
       showCart = !showCart;
     });
   }
 
-  void deleteOnClick() {
+  void _deleteOnClick() {
     final cart = Provider.of<Cart>(context);
     cart.emptyCart();
   }
 
-  void categoryOnClick(BuildContext context) {
+  void _categoryOnClick(BuildContext context) {
     Navigator.of(context).pop();
   }
 
-  void checkoutOnClick() {
+  void _checkoutOnClick() {
     print('Go to checkout here!');
   }
 
   Widget buildButton() {
     Widget homeBtn = IconButton(
-      icon: Icon(Icons.view_agenda, color: AppColors.appWhite),
-      onPressed: () => categoryOnClick(context),
+      icon: Icon(Icons.arrow_back, color: AppColors.appWhite),
+      onPressed: () => _categoryOnClick(context),
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(left: 15.0),
     );
     Widget deleteBtn = IconButton(
       icon: Icon(Icons.delete_outline, color: AppColors.appWhite),
-      onPressed: () => deleteOnClick(),
+      onPressed: () => _deleteOnClick(),
       alignment: Alignment.centerLeft,
       padding: const EdgeInsets.only(left: 15.0),
     );
@@ -82,11 +77,10 @@ class _CartAppBarState extends State<CartAppBar> {
     double screenHeight = MediaQuery.of(context).size.height;
     double appBarHeight = 56;
     double dragStart;
-    final cart = Provider.of<Cart>(context);
+    final cart = Provider.of<Cart>(context, listen: false);
 
     return GestureDetector(
       onVerticalDragStart: (d) {
-        print(d.globalPosition.dy);
         dragStart = d.globalPosition.dy;
       },
       onVerticalDragUpdate: (d) {
@@ -103,8 +97,16 @@ class _CartAppBarState extends State<CartAppBar> {
         curve: Curves.easeOut,
         height: showCart == true ? screenHeight * 0.85 : 56 + statusbar,
         decoration: BoxDecoration(
-            color: AppColors.appBlue1,
-            boxShadow: [BoxShadow(color: AppColors.appBlack, blurRadius: 10, spreadRadius: 10, offset: Offset(0, -10))]),
+          color: AppColors.appBlue1,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.appBlack,
+              blurRadius: 10,
+              spreadRadius: 10,
+              offset: Offset(0, -10),
+            ),
+          ],
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -116,9 +118,15 @@ class _CartAppBarState extends State<CartAppBar> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     buildButton(),
-                    Expanded(child: Text(showCart ? 'Cart' : widget.title, textAlign: TextAlign.center, style: AppFonts.appbarTitle())),
+                    Expanded(
+                      child: Text(
+                        showCart ? 'Cart' : widget.title,
+                        textAlign: TextAlign.center,
+                        style: AppFonts.appbarTitle(),
+                      ),
+                    ),
                     CartIconButton(
-                      cartOnClick: cartOnClick,
+                      cartOnClick: _cartOnClick,
                     ),
                   ],
                 ),
@@ -171,10 +179,12 @@ class _CartAppBarState extends State<CartAppBar> {
                                 );
                               }),
                               RaisedButton(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
                                 color: AppColors.appWhite,
                                 splashColor: Colors.grey,
-                                onPressed: () => checkoutOnClick(),
+                                onPressed: () => _checkoutOnClick(),
                                 child: Container(
                                   child: Row(
                                     children: <Widget>[

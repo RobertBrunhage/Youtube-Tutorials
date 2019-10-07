@@ -14,7 +14,7 @@ class CartIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context);
+    final cart = Provider.of<Cart>(context, listen: false);
     return IconButton(
       icon: Container(
         height: 50,

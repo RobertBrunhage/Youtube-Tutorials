@@ -33,10 +33,8 @@ abstract class _Cart with Store {
   @observable
   double freight = 0;
 
-  @computed
   int getProductQuantity(Product product) => ObservableList.of(cartContent.where((p) => p == product)).length;
 
-  @computed
   double getProductValue(Product product) {
     return ObservableList.of(cartContent.where((p) => p == product)).fold<double>(0, (totalValue, product) => totalValue + product.price);
   }

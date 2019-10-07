@@ -5,7 +5,13 @@ import 'package:state_management_example/shared/styles/app_fonts.dart';
 import 'package:state_management_example/shared/utils/app_variables.dart';
 
 class CategoryCard extends StatelessWidget {
-  CategoryCard({this.title, this.text, this.color, this.iconData, this.category});
+  CategoryCard({
+    this.title,
+    this.text,
+    this.color,
+    this.iconData,
+    this.category,
+  });
 
   final String title;
   final String text;
@@ -14,7 +20,11 @@ class CategoryCard extends StatelessWidget {
   final Category category;
 
   void navigateToProducts({BuildContext context, Category category}) {
-    Navigator.of(context).push<ProductPage>(MaterialPageRoute(builder: (BuildContext context) => ProductPage(category: category)));
+    Navigator.of(context).push<ProductPage>(
+      MaterialPageRoute(
+        builder: (BuildContext context) => ProductPage(category: category),
+      ),
+    );
   }
 
   @override
@@ -75,12 +85,14 @@ class CategoryCard extends StatelessWidget {
                 height: double.infinity,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(3),
-                        bottomRight: Radius.circular(3),
-                        topLeft: Radius.circular(35),
-                        bottomLeft: Radius.circular(35))),
+                  color: color,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(3),
+                    bottomRight: Radius.circular(3),
+                    topLeft: Radius.circular(35),
+                    bottomLeft: Radius.circular(35),
+                  ),
+                ),
                 child: Icon(
                   iconData,
                   size: 75,

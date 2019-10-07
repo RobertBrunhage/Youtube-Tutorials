@@ -114,10 +114,11 @@ class AppDialog {
                       splashColor: Colors.grey,
                       onPressed: () => _confirmOnClick(context: context, newQuantity: int.parse(textEditingController.text)),
                       child: Container(
-                          child: Text(
-                        'Confirm',
-                        style: AppFonts.categoryCardBtn(),
-                      )),
+                        child: Text(
+                          'Confirm',
+                          style: AppFonts.categoryCardBtn(),
+                        ),
+                      ),
                     ),
                   ],
                 )

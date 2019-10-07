@@ -7,7 +7,11 @@ import 'package:state_management_example/shared/styles/app_fonts.dart';
 import 'package:state_management_example/shared/utils/app_dialogs.dart';
 
 class CartListTile extends StatefulWidget {
-  CartListTile({@required this.product, @required this.quantity});
+  CartListTile({
+    @required this.product,
+    @required this.quantity,
+  });
+
   final Product product;
   final int quantity;
 
@@ -17,6 +21,14 @@ class CartListTile extends StatefulWidget {
 
 class _CartListTileState extends State<CartListTile> {
   int quantity;
+  Cart cart;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    cart = Provider.of(context, listen: false);
+  }
+
   @override
   void initState() {
     quantity = widget.quantity;
@@ -24,13 +36,16 @@ class _CartListTileState extends State<CartListTile> {
   }
 
   Future<void> tileOnClick() async {
-    final cart = Provider.of<Cart>(context);
-    quantity = await AppDialog.quantityDialog(context: context, title: 'Quantity', quantity: widget.quantity);
+    quantity = await AppDialog.quantityDialog(
+      context: context,
+      title: 'Quantity',
+      quantity: widget.quantity,
+    );
+
     cart.changeQuantity(widget.product, quantity);
   }
 
   void tileOnSwipe(Product product) {
-    final cart = Provider.of<Cart>(context);
     cart.removeAllFromCart(widget.product);
   }
 

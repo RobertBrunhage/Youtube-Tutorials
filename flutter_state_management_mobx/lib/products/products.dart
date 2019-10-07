@@ -27,7 +27,13 @@ class _ProductPageState extends State<ProductPage> {
         category: Category.Games,
         price: 70.0,
         imageURL: 'assets/pictures/Mario.jpg'),
-    Product(name: 'Dart', description: 'Simple dart game.', category: Category.Games, price: 20.0, imageURL: 'assets/pictures/Dart.jpg'),
+    Product(
+      name: 'Dart',
+      description: 'Simple dart game.',
+      category: Category.Games,
+      price: 20.0,
+      imageURL: 'assets/pictures/Dart.jpg',
+    ),
     Product(
         name: 'Watermelon',
         description: 'Water and suger in a red solid form.',
