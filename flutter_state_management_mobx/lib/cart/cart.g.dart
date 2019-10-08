@@ -21,38 +21,38 @@ mixin _$Cart on _Cart, Store {
           Computed<List<Product>>(() => super.uniqueProducts))
       .value;
 
-  final _$cartContentAtom = Atom(name: '_Cart.cartContent');
+  final _$_cartContentAtom = Atom(name: '_Cart._cartContent');
 
   @override
-  ObservableList<Product> get cartContent {
-    _$cartContentAtom.context.enforceReadPolicy(_$cartContentAtom);
-    _$cartContentAtom.reportObserved();
-    return super.cartContent;
+  ObservableList<Product> get _cartContent {
+    _$_cartContentAtom.context.enforceReadPolicy(_$_cartContentAtom);
+    _$_cartContentAtom.reportObserved();
+    return super._cartContent;
   }
 
   @override
-  set cartContent(ObservableList<Product> value) {
-    _$cartContentAtom.context.conditionallyRunInAction(() {
-      super.cartContent = value;
-      _$cartContentAtom.reportChanged();
-    }, _$cartContentAtom, name: '${_$cartContentAtom.name}_set');
+  set _cartContent(ObservableList<Product> value) {
+    _$_cartContentAtom.context.conditionallyRunInAction(() {
+      super._cartContent = value;
+      _$_cartContentAtom.reportChanged();
+    }, _$_cartContentAtom, name: '${_$_cartContentAtom.name}_set');
   }
 
-  final _$freightAtom = Atom(name: '_Cart.freight');
+  final _$_freightAtom = Atom(name: '_Cart._freight');
 
   @override
-  double get freight {
-    _$freightAtom.context.enforceReadPolicy(_$freightAtom);
-    _$freightAtom.reportObserved();
-    return super.freight;
+  double get _freight {
+    _$_freightAtom.context.enforceReadPolicy(_$_freightAtom);
+    _$_freightAtom.reportObserved();
+    return super._freight;
   }
 
   @override
-  set freight(double value) {
-    _$freightAtom.context.conditionallyRunInAction(() {
-      super.freight = value;
-      _$freightAtom.reportChanged();
-    }, _$freightAtom, name: '${_$freightAtom.name}_set');
+  set _freight(double value) {
+    _$_freightAtom.context.conditionallyRunInAction(() {
+      super._freight = value;
+      _$_freightAtom.reportChanged();
+    }, _$_freightAtom, name: '${_$_freightAtom.name}_set');
   }
 
   final _$_CartActionController = ActionController(name: '_Cart');
