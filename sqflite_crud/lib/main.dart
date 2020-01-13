@@ -6,6 +6,7 @@ import 'package:sqflite_crud/repository/database_creator.dart';
 import 'package:sqflite_crud/repository/repository_service_todo.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await DatabaseCreator().initDatabase();
   runApp(MyApp());
 }
